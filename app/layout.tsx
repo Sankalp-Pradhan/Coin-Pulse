@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   description: "Get Realtime stock markert updates.",
 };
 
+/**
+ * Renders the application's root HTML structure with dark mode, configured fonts, a header, and the provided page content.
+ *
+ * @param children - The page content to render inside the layout's <body>.
+ * @returns The root <html> element containing the header and the provided children.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
