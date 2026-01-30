@@ -1,11 +1,15 @@
 import Image from "next/image"
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
+
+import DataTable from "../components/DataTable"
+
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { fetcher } from "@/lib/coingecko.actions";
 import { Suspense } from "react";
 import CoinOverview from "@/components/home/CoinOverview";
 import TrendingCoins from "@/components/home/TrendingCoins";
-import { CoinOverviewFallback, TrendingCoinsFallback } from "@/components/home/Fallback";
+import { CoinOverviewFallback, TrendingCoinsFallback } from "@/components/home/Fallback"
 
 const columns: DataTableColumn<TrendingCoin>[] = [
   {
@@ -50,10 +54,7 @@ const columns: DataTableColumn<TrendingCoin>[] = [
   }
 ]
 
-
-
 export default async function Home() {
-
   return (
     <main className="main-container">
       <section className="home-grid ">
