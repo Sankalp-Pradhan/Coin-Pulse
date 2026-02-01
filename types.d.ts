@@ -36,7 +36,12 @@ interface Ticker {
   trade_url: string;
 }
 
-type Period = 'daily' | 'weekly' | 'monthly' | '3months' | '6months' | 'yearly' | 'max';
+// type Period = 'daily' | 'weekly' | 'monthly' | '3months' | '6months' | 'yearly' | 'max';
+// Remove this line:
+// type Period = 'daily' | 'weekly' | 'monthly' | '3months' | '6months' | 'yearly' | 'max';
+
+// Replace with:
+type Period = '1D' | '1W' | '1M' | '3M' | '6M' | '1Y' | 'Max';
 
 interface CoinMarketData {
   id: string;
