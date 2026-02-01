@@ -54,6 +54,15 @@ const API_KEY = process.env.COINGECKO_API_KEY
 if (!BASE_URL) throw new Error('could not get base url')
 if (!API_KEY) throw new Error('could not get Api key')
 
+/**
+ * Fetches JSON from the configured CoinGecko base URL for the specified endpoint and returns the parsed response.
+ *
+ * @param endpoint - Path relative to the configured base URL; a leading slash is permitted and will be normalized.
+ * @param params - Optional query parameters to append to the request URL.
+ * @param revalidate - Cache revalidation time in seconds for the fetch request.
+ * @returns The parsed JSON response as type `T`.
+ * @throws An `Error` when the HTTP response status is not OK; the message includes the status code and error text.
+ */
 export async function fetcher<T>(
     endpoint: string,
     params?: QueryParams,
