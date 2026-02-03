@@ -1,10 +1,10 @@
 
 import { fetcher } from "@/lib/coingecko.actions";
 import Image from "next/image";
-import Link from "next/link";
 import { cn, formatPercentage, formatCurrency } from "@/lib/utils";
 import DataTable from "@/components/DataTable";
 import CoinsPagination from "@/components/ui/coinsPagination";
+import Error from "next/error";
 
 const Coins = async ({ searchParams }: NextPageProps) => {
     const { page } = await searchParams;
@@ -12,14 +12,29 @@ const Coins = async ({ searchParams }: NextPageProps) => {
     const currentPage = Number(page) || 1;
 
     // ✅ FIXED: Add page and per_page parameters to the API call
-    const coinsData = await fetcher<CoinMarketData[]>("/coins/markets", {
-        vs_currency: "usd",
-        order: "market_cap_desc",
-        sparkline: "false",
-        price_change_percentage: "24h",
-        per_page: perPage,
-        page: currentPage,
-    });
+    // const coinsData = await fetcher<CoinMarketData[]>("/coins/markets", {
+    //     vs_currency: "usd",
+    //     order: "market_cap_desc",
+    //     sparkline: "false",
+    //     price_change_percentage: "24h",
+    //     per_page: perPage,
+    //     page: currentPage,
+    // });
+
+    let coinsData: CoinMarketData[] = [];
+    try {
+        coinsData = await fetcher<CoinMarketData[]>("/coins/markets", {
+            vs_currency: "usd",
+            order: "market_cap_desc",
+            sparkline: "false",
+            price_change_percentage: "24h",
+            per_page: perPage,
+            page: currentPage,
+        });
+    } catch (error) {
+        console.error("Failed to fetch coins data:", error);
+        <Error statusCode={404} />
+    }
 
     const hasMorePages = coinsData.length === perPage;
 
@@ -33,7 +48,6 @@ const Coins = async ({ searchParams }: NextPageProps) => {
             cell: (coin) => (
                 <>
                     #{coin.market_cap_rank}
-                    <Link href={`/coins/${coin.id}`} aria-label="View coin" />
                 </>
             ),
         },
@@ -58,17 +72,18 @@ const Coins = async ({ searchParams }: NextPageProps) => {
             header: "24h Change",
             cellClassName: "change-cell",
             cell: (coin) => {
-                const isTrendingUp = coin.price_change_percentage_24h > 0;
-
+                const change = coin.price_change_percentage_24h;
+                const isTrendingUp = change > 0;
+                const isTrendingDown = change < 0;
                 return (
                     <span
                         className={cn("change-value", {
                             "text-green-600": isTrendingUp,
-                            "text-red-500": !isTrendingUp,
+                            "text-red-500": isTrendingDown,
                         })}
                     >
                         {isTrendingUp && "+"}
-                        {formatPercentage(coin.price_change_percentage_24h)}
+                        {formatPercentage(change)}
                     </span>
                 );
             },
