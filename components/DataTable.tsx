@@ -2,7 +2,6 @@
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -12,14 +11,23 @@ import { cn } from "@/lib/utils"
 
 
 const DataTable = <T,>({
-    columns, data, rowKey, tableClassName, headerClassName, headerRowClassName, headerCellClassName, bodyRowClassName, bodyCellClassName
+    columns,
+    data,
+    rowKey,
+    tableClassName,
+    headerClassName,
+    headerRowClassName,
+    headerCellClassName,
+    bodyRowClassName,
+    bodyCellClassName,
+
 }: DataTableProps<T>) => {
     return (
         <Table className={cn("custom-scrollbar", tableClassName)}>
-            <TableHeader className="headerClassName">
+            <TableHeader className={headerClassName}>
                 <TableRow className={cn("hover:bg-transparent!", headerRowClassName)}>
                     {columns.map((column, i) => (
-                        <TableHead key={i} className={cn('bg-dark-400 text-purple-100 py-4 first:pl-5 last:pr-4')}>
+                        <TableHead key={i} className={cn('bg-dark-400 text-purple-100 py-4 first:pl-5 last:pr-4', headerCellClassName, column.headClassName)}>
                             {column.header}
                         </TableHead>
                     ))}
@@ -30,8 +38,8 @@ const DataTable = <T,>({
                     <TableRow key={rowKey(row, rowIndex)} className={cn(
                         'overflow-hidden rounded-lg border-b border-purple-100/5 hover:bg-dark-500/30! relative', bodyRowClassName
                     )}>
-                        {columns.map((column,columnIndex ) => (
-                            <TableCell key={columnIndex} className={cn('py-4 first:pl-4 last:pr-5')}>
+                        {columns.map((column, columnIndex) => (
+                            <TableCell key={columnIndex} className={cn('py-4 first:pl-4 last:pr-5', bodyCellClassName, column.cellClassName)}>
                                 {column.cell(row, rowIndex)}
                             </TableCell>
                         ))}

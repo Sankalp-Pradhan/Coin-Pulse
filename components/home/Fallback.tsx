@@ -1,5 +1,6 @@
 import React from 'react';
 import DataTable from '../DataTable';
+import { Skeleton } from '../ui/skeleton';
 
 export const CoinOverviewFallback = () => {
   return (
@@ -75,3 +76,64 @@ export const TrendingCoinsFallback = () => {
     </div>
   );
 };
+
+
+const CategoriesFallback = () => {
+  // Create 10 skeleton rows to match the slice(0, 10) from the original
+  const skeletonRows = Array.from({ length: 10 });
+
+  return (
+    <div id='categories-fallback' className='custom-scrollbar'>
+      <h4>Top Categories</h4>
+
+      <div className="mt-3">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-dark-400">
+              <th className="text-left py-4 pl-5 text-purple-100 font-medium">Category</th>
+              <th className="text-left py-4 text-purple-100 font-medium">Top Gainers</th>
+              <th className="text-left py-4 text-purple-100 font-medium">24h Change</th>
+              <th className="text-left py-4 text-purple-100 font-medium">Market Cap</th>
+              <th className="text-left py-4 pr-5 text-purple-100 font-medium">24h Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            {skeletonRows.map((_, index) => (
+              <tr key={index} className="border-b border-dark-400 last:border-none">
+                {/* Category Name */}
+                <td className="category-cell py-5">
+                  <Skeleton className="category-skeleton skeleton" />
+                </td>
+
+                {/* Top Gainers - 3 coin images */}
+                <td className="top-gainers-cell py-5">
+                  <Skeleton className="coin-skeleton skeleton" />
+                  <Skeleton className="coin-skeleton skeleton" />
+                  <Skeleton className="coin-skeleton skeleton" />
+                </td>
+
+                {/* 24h Change */}
+                <td className="change-cell py-5">
+                  <Skeleton className="change-icon skeleton" />
+                  <Skeleton className="value-skeleton-sm skeleton" />
+                </td>
+
+                {/* Market Cap */}
+                <td className="market-cap-cell py-5">
+                  <Skeleton className="value-skeleton-md skeleton" />
+                </td>
+
+                {/* 24h Volume */}
+                <td className="volume-cell py-5">
+                  <Skeleton className="value-skeleton-lg skeleton" />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default CategoriesFallback;
