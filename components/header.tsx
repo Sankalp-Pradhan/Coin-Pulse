@@ -24,9 +24,9 @@ const Header = () => {
                     })}>
                         Home</Link>
 
-                    <p className='border-gray-400 rounded-lg'>
+                    <div className='border-gray-400 rounded-lg'>
                         <SearchModal />
-                    </p>
+                    </div>
 
                     <Link href="/coins" className={cn('nav-link', {
                         'is-active': pathName === '/coins',

@@ -38,8 +38,24 @@ export function OrderBook({ coinId }: OrderBookProps) {
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${coinId}/tickers?include_exchange_logo=false&depth=true`
         );
+
+
+        if (!response.ok) {
+          console.error('Order book fetch failed', response.status);
+          setOrderBookData([]);
+          setLoading(false);
+          return;
+        }
+
         const data = await response.json();
         
+        if (!data.tickers || !Array.isArray(data.tickers)) {
+          console.error('Invalid order book data');
+          setLoading(false);
+          return;
+        }
+
+
         // Transform ticker data into order book entries
         const entries: OrderBookEntry[] = data.tickers
           .slice(0, 10) // Get first 10 tickers

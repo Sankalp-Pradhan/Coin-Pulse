@@ -547,7 +547,7 @@
     }
 
     .details {
-      @apply w-full mt-8 space-y-4 border-red-700 ;
+      @apply w-full mt-8 space-y-4 ;
 
       h4 {
         @apply text-xl md:text-2xl font-semibold mb-2 pb-3;

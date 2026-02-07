@@ -37,8 +37,15 @@ export function ETHConverter({ coin }: ETHConverterProps) {
         const response = await fetch(
           `https://api.coingecko.com/api/v3/simple/price?ids=${coin.id}&vs_currencies=usd,eur,gbp,jpy,btc`
         );
-        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            `Exchange rate fetch failed: ${response.status} ${response.statusText}`
+          );
+        }
         
+        const data = await response.json();
+
         if (data[coin.id]) {
           setExchangeRates(data[coin.id]);
         }
@@ -74,9 +81,9 @@ export function ETHConverter({ coin }: ETHConverterProps) {
     if (selectedCurrency === 'btc') {
       return convertedAmount.toFixed(8);
     }
-    return convertedAmount.toLocaleString('en-US', { 
-      minimumFractionDigits: 2, 
-      maximumFractionDigits: 2 
+    return convertedAmount.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     });
   };
 
@@ -113,8 +120,8 @@ export function ETHConverter({ coin }: ETHConverterProps) {
             </SelectTrigger>
             <SelectContent data-converter className="select-content">
               {currencies.map((currency) => (
-                <SelectItem 
-                  key={currency.value} 
+                <SelectItem
+                  key={currency.value}
                   value={currency.value}
                   className="select-item"
                 >

@@ -48,6 +48,11 @@ export function TrendOverview({ coin, coinOHLCData }: TrendOverviewProps) {
         const res = await fetch(
           `https://api.coingecko.com/api/v3/coins/${coin.id}/ohlc?vs_currency=usd&days=${days}`
         );
+
+        if (!res.ok) {
+          throw new Error(`OHLC fetch failed: ${res.status}`);
+        }
+
         const data: OHLCData[] = await res.json();
         setChartData(data);
       } catch (err) {
@@ -153,12 +158,11 @@ export function TrendOverview({ coin, coinOHLCData }: TrendOverviewProps) {
   return (
     <div id="coin-overview">
       <CandleStickCharts
+        coinId={coin.id}
         data={coinOHLCData}
-        coinId='bitcoin'
-        mode='historical'
-        liveInterval={liveInterval}
-        setLiveInterval={setLiveInterval}
       />
+
+
       {/* <div id="candlestick-chart">
         <div className="chart-header">
           <div className="header">

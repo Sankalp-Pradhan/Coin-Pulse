@@ -230,8 +230,6 @@ export interface CoinDetailsData {
   };
 }
 
-// OHLC Data Type
-export type OHLCData = [number, number, number, number, number];
 
 // Pool Data Type
 export interface PoolData {

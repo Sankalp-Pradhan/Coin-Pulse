@@ -90,15 +90,15 @@ export function SearchModal() {
             setIsLoadingTrending(true);
             try {
                 const response = await fetch('/api/coins/trending');
-                
+
                 if (!response.ok) {
                     console.error('Trending API failed:', response.status);
                     // Keep using fallback data
                     return;
                 }
-                
+
                 const data = await response.json();
-                
+
                 if (Array.isArray(data) && data.length > 0) {
                     setTrendingCoins(data.slice(0, 5));
                 } else {
@@ -126,15 +126,16 @@ export function SearchModal() {
 
         setIsSearching(true);
         const timer = setTimeout(async () => {
-            try {
+            setIsSearching(true);
+            try {                    
                 const response = await fetch(`/api/coins/search?q=${encodeURIComponent(searchQuery)}`);
-                
+
                 if (!response.ok) {
                     console.error('Search API failed:', response.status);
                     setSearchResults([]);
                     return;
                 }
-                
+
                 const data = await response.json();
                 setSearchResults(data.coins || []);
             } catch (error) {

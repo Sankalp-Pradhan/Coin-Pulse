@@ -1,5 +1,3 @@
-// app/coins/[id]/page.tsx
-
 import { CoinDetailsClient } from "@/components/coins/coinDetailsClient";
 import { TrendOverview } from "@/components/coins/TrendOverview";
 import { fetcher } from "@/lib/coingecko.actions";
@@ -31,12 +29,12 @@ const CoinDetailsPage = async ({ params }: CoinDetailsPageProps) => {
 
     return (
       <div>
-        <CoinDetailsClient coin={coin} coinOHLCData={coinOHLCData}/>
+        <CoinDetailsClient coin={coin} coinOHLCData={coinOHLCData} />
       </div>
     );
   } catch (error) {
     console.error('Error fetching coin details', error);
-    // Your error handling
+    return <div>Error loading coin details.</div>;
   }
 };
 

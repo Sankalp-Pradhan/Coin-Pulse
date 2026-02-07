@@ -31,6 +31,14 @@ export function SimilarCoins({ coinId, category }: SimilarCoinsProps) {
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`
         );
+
+
+        if (!response.ok) {
+          throw new Error(
+            `Similar coins failed: ${response.status} ${response.statusText}`
+          );
+        }
+
         const data = await response.json();
 
         // Filter out the current coin and take top 5

@@ -39,6 +39,13 @@ export function RecentTrades({ coinId }: RecentTradesProps) {
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${coinId}/tickers?include_exchange_logo=false`
         );
+
+        if (!response.ok) {
+          throw new Error(
+            `Recent trades failed: ${response.status} ${response.statusText}`
+          );
+        }
+
         const data = await response.json();
 
         // Transform ticker data into trade entries
@@ -55,8 +62,8 @@ export function RecentTrades({ coinId }: RecentTradesProps) {
 
             return {
               time,
-              price: ticker.converted_last.usd,
-              amount: ticker.converted_volume.eth,
+              price: ticker.converted_last?.usd ?? 0,
+              amount: ticker.converted_volume?.eth ?? 0,
               type: index % 2 === 0 ? 'buy' : 'sell',
             };
           });
