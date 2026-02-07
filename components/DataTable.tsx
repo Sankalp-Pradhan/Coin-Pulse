@@ -8,6 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
+import { DataTableProps } from "@/types"
 
 
 const DataTable = <T,>({
@@ -35,12 +36,14 @@ const DataTable = <T,>({
             </TableHeader>
             <TableBody>
                 {data.map((row, rowIndex) => (
-                    <TableRow key={rowKey(row, rowIndex)} className={cn(
-                        'overflow-hidden rounded-lg border-b border-purple-100/5 hover:bg-dark-500/30! relative', bodyRowClassName
-                    )}>
+                    <TableRow
+                        key={rowKey?.(row, rowIndex) ?? rowIndex}
+                        className={cn(
+                            'overflow-hidden rounded-lg border-b border-purple-100/5 hover:bg-dark-500/30! relative', bodyRowClassName
+                        )}>
                         {columns.map((column, columnIndex) => (
                             <TableCell key={columnIndex} className={cn('py-4 first:pl-4 last:pr-5', bodyCellClassName, column.cellClassName)}>
-                                {column.cell(row, rowIndex)}
+                                {column.cell?.(row, rowIndex) ?? rowIndex}
                             </TableCell>
                         ))}
                     </TableRow>

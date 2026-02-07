@@ -7,6 +7,7 @@ import DataTable from '../DataTable';
 import Link from 'next/link';
 import { Rye } from 'next/font/google';
 import { TrendingCoinsFallback } from './Fallback';
+import { DataTableColumn, TrendingCoin } from '@/types';
 
 const TrendingCoins = async () => {
 

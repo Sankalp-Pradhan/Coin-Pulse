@@ -4,7 +4,7 @@ import Image from "next/image";
 import { cn, formatPercentage, formatCurrency } from "@/lib/utils";
 import DataTable from "@/components/DataTable";
 import CoinsPagination from "@/components/ui/coinsPagination";
-import { CoinMarketData, NextPageProps } from "@/types";
+import { CoinMarketData, DataTableColumn, NextPageProps } from "@/types";
 
 const Coins = async ({ searchParams }: NextPageProps) => {
     const { page } = await searchParams;
@@ -90,8 +90,7 @@ const Coins = async ({ searchParams }: NextPageProps) => {
             <div className="content">
                 <h4>All Coins</h4>
 
-                <DataTable
-                    tableClassName="coins-table"
+                <DataTable<CoinMarketData>
                     columns={columns}
                     data={coinsData}
                     rowKey={(coin) => coin.id}

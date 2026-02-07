@@ -160,6 +160,8 @@ export function TrendOverview({ coin, coinOHLCData }: TrendOverviewProps) {
       <CandleStickCharts
         coinId={coin.id}
         data={coinOHLCData}
+        liveInterval={liveInterval}
+        setLiveInterval={setLiveInterval}
       />
 
 

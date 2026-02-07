@@ -17,6 +17,7 @@ interface CandlestickChartProps {
   setLiveInterval: (interval: '1s' | '1m') => void;
 }
 
+
 interface ConverterProps {
   symbol: string;
   icon: string;
@@ -273,4 +274,39 @@ export interface SimilarCoin {
   image: string;
   current_price: number;
   price_change_percentage_24h: number;
+}
+export interface DataTableColumn<T> {
+  header: string;
+  accessorKey?: keyof T;
+  cell?: (row: T, rowIndex: number) => React.ReactNode
+
+  /** classNames */
+  headClassName?: string;
+  cellClassName?: string;
+}
+
+export interface DataTableProps<T> {
+  data: T[];
+  columns: DataTableColumn<T>[];
+
+  /** keys */
+  rowKey?: (row: T, rowIndex: number) => string | number
+
+  /** table-level classes */
+  tableClassName?: string;
+  headerClassName?: string;
+  headerRowClassName?: string;
+  headerCellClassName?: string;
+  bodyRowClassName?: string;
+  bodyCellClassName?: string;
+}
+
+
+export type Category = {
+  id: string
+  name: string
+  market_cap: number
+  market_cap_change_24h: number
+  volume_24h: number
+  top_3_coins: string[]
 }

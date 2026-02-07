@@ -9,7 +9,7 @@ import CoinOverview from "@/components/home/CoinOverview";
 import TrendingCoins from "@/components/home/TrendingCoins";
 import CategoriesFallback, { CoinOverviewFallback, TrendingCoinsFallback } from "@/components/home/Fallback"
 import Categories from "@/components/home/Categories";
-import { TrendingCoin } from "@/types";
+import { DataTableColumn, TrendingCoin } from "@/types";
 
 const columns: DataTableColumn<TrendingCoin>[] = [
   {

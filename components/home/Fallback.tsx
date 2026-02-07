@@ -1,6 +1,7 @@
 import React from 'react';
 import DataTable from '../DataTable';
 import { Skeleton } from '../ui/skeleton';
+import { DataTableColumn } from '@/types';
 
 export const CoinOverviewFallback = () => {
   return (
