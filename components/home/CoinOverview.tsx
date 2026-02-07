@@ -1,7 +1,7 @@
 import { fetcher } from '@/lib/coingecko.actions';
-import React from 'react';
 import { CoinOverviewFallback } from './Fallback';
 import { CoinOverviewClient } from './CoinOverviewClient';
+import { CoinDetailsData, OHLCData } from '@/types';
 
 const CoinOverview = async () => {
     try {
