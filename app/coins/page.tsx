@@ -4,22 +4,13 @@ import Image from "next/image";
 import { cn, formatPercentage, formatCurrency } from "@/lib/utils";
 import DataTable from "@/components/DataTable";
 import CoinsPagination from "@/components/ui/coinsPagination";
-import Error from "next/error";
+import { CoinMarketData, NextPageProps } from "@/types";
 
 const Coins = async ({ searchParams }: NextPageProps) => {
     const { page } = await searchParams;
     const perPage = 10;
     const currentPage = Number(page) || 1;
 
-    // ✅ FIXED: Add page and per_page parameters to the API call
-    // const coinsData = await fetcher<CoinMarketData[]>("/coins/markets", {
-    //     vs_currency: "usd",
-    //     order: "market_cap_desc",
-    //     sparkline: "false",
-    //     price_change_percentage: "24h",
-    //     per_page: perPage,
-    //     page: currentPage,
-    // });
 
     let coinsData: CoinMarketData[] = [];
     try {
@@ -33,7 +24,6 @@ const Coins = async ({ searchParams }: NextPageProps) => {
         });
     } catch (error) {
         console.error("Failed to fetch coins data:", error);
-        <Error statusCode={404} />
     }
 
     const hasMorePages = coinsData.length === perPage;

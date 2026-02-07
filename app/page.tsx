@@ -1,16 +1,15 @@
 import Image from "next/image"
 import Link from "next/link";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-import DataTable from "../components/DataTable"
 
-import { Heading1, TrendingDown, TrendingUp } from "lucide-react";
-import { fetcher } from "@/lib/coingecko.actions";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import { Suspense } from "react";
 import CoinOverview from "@/components/home/CoinOverview";
 import TrendingCoins from "@/components/home/TrendingCoins";
 import CategoriesFallback, { CoinOverviewFallback, TrendingCoinsFallback } from "@/components/home/Fallback"
 import Categories from "@/components/home/Categories";
+import { TrendingCoin } from "@/types";
 
 const columns: DataTableColumn<TrendingCoin>[] = [
   {
@@ -70,8 +69,8 @@ export default async function Home() {
 
 
       <section className="w-full mt-7 space-y-4 ">
-        <Suspense fallback={<CategoriesFallback/>}>
-          <Categories  />
+        <Suspense fallback={<CategoriesFallback />}>
+          <Categories />
         </Suspense>
       </section>
 

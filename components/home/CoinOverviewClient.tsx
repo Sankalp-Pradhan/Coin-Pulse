@@ -4,6 +4,7 @@ import { useState } from 'react';
 import CandleStickCharts from '../CandleStickCharts';
 import Image from 'next/image';
 import { formatCurrency } from '@/lib/utils';
+import { CoinDetailsData, OHLCData } from '@/types';
 
 interface CoinOverviewClientProps {
     coin: CoinDetailsData;

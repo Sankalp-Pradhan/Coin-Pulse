@@ -547,14 +547,14 @@
     }
 
     .details {
-      @apply w-full mt-8 space-y-4;
+      @apply w-full mt-8 space-y-4 ;
 
       h4 {
         @apply text-xl md:text-2xl font-semibold mb-2 pb-3;
       }
 
       .details-grid {
-        @apply rounded-lg grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3 sm:gap-5;
+        @apply rounded-lg grid  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3 sm:gap-5;
 
         li {
           @apply text-base bg-dark-500 px-5 py-6 rounded-lg flex flex-col gap-3;
@@ -812,7 +812,7 @@
   }
 
   #coin-overview {
-    @apply w-full h-full xl:col-span-2 px-2 bg-dark-500  rounded-xl;
+    @apply w-full h-auto xl:col-span-2 px-2 bg-dark-500  rounded-xl;
 
     .header {
       @apply flex-1 mb-2 flex gap-2 md:gap-3;
